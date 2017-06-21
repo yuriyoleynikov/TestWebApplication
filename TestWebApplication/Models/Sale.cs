@@ -9,5 +9,6 @@ namespace TestWebApplication.Models
     {
         public int SaleId { get; set; }
         public DateTime Date { get; set; }
+        public IEnumerable<SaleEntry> SaleEntries { get; set; }
     }
 }
