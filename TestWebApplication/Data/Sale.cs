@@ -9,5 +9,6 @@ namespace TestWebApplication.Data
     {
         public int SaleId { get; set; }
         public DateTime Date { get; set; }
+        public virtual List<SaleEntry> SaleEntries { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿@using TestWebApplication.Models;
+@model Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="EditProduct" asp-route-id="@Model.ProductId">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="@Model.Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.Description" class="form-control" />
+                <span asp-validation-for="@Model.Description" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.ProductCode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.ProductCode" class="form-control" />
+                <span asp-validation-for="@Model.ProductCode" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Price" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.Price" class="form-control" />
+                <span asp-validation-for="@Model.Price" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Quantity" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.Quantity" class="form-control" />
+                <span asp-validation-for="@Model.Quantity" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Stock">Back to List</a>
+</div>

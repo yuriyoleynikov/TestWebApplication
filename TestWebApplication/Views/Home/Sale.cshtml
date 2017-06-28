@@ -1,0 +1,114 @@
+﻿@using TestWebApplication.Models.ViewModels;
+@model SaleViewModel
+@{
+    ViewData["Title"] = "Sale";
+}
+
+<div>
+    <h2>Sale</h2>
+    <div>
+        <form action="@Url.Action("AddSaleEntry", new { productId = Model.SaleEntryModel.Select(entry => entry.ProductId),
+                     quantities = Model.SaleEntryModel.Select(entry => entry.Quantity) })" method="post">
+            <div class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <input name="name" class="form-control center-block" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Quantity</label>
+                    <input name="quantity" class="form-control center-block" />
+
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Add Product" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ProductCode
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                decimal total = 0;
+            }
+            @foreach (var product in Model.SaleEntryModel)
+            {
+                var productInfo = Model.ProductList.SingleOrDefault(prod => prod.ProductId == product.ProductId);
+                decimal sum = productInfo.Price * product.Quantity;
+                total += sum;
+                <tr>
+                    <td>
+                        @productInfo.Name
+                    </td>
+                    <td>
+                        @productInfo.ProductCode
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @sum.ToString("C")
+                    </td>
+                </tr>
+            }
+            @if (Model.SaleEntryModel.Any())
+            {
+                <tr>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <b>@total.ToString("C")</b>                        
+                    </td>
+                </tr>
+            }            
+        </tbody>
+    </table>
+    <div>
+        @if (Model.SaleEntryModel.Any())
+        {
+            <form action="@Url.Action("Sell", new { productId = Model.SaleEntryModel.Select(entry => entry.ProductId),
+                     quantities = Model.SaleEntryModel.Select(entry => entry.Quantity) })" method="post">
+                <div class="form-horizontal">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">Cash</label>
+                        <input name="cash" class="form-control center-block" />
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input type="submit" value="Sell" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }        
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@using TestWebApplication.Models;
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Stock";
+}
+<div>
+    <p>
+        <a asp-action="AddProduct">Add new product</a>
+    </p>
+</div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Product code
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.ProductCode
+                    </td>
+                    <td>
+                        @product.Price.ToString("C")
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditProduct", "Home", new { productId = product.ProductId }) |
+                        @Html.ActionLink("Details", "DetailsProduct", "Home", new { productId = product.ProductId }) |
+                        @Html.ActionLink("Delete", "DeleteProduct", "Home", new { productId = product.ProductId })
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -11,4 +11,11 @@ namespace TestWebApplication.Models
         public DateTime Date { get; set; }
         public IEnumerable<SaleEntry> SaleEntries { get; set; }
     }
+
+    public class SaleEntry
+    {
+        public int ProductId { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Price { get; set; }
+    }
 }

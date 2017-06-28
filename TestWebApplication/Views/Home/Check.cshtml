@@ -1,0 +1,84 @@
+@using TestWebApplication.Models.ViewModels;
+@model CheckViewModel
+@{
+    ViewData["Title"] = "Check";
+}
+
+<h2>Check</h2>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ProductCode
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                decimal total = 0;
+            }
+            @foreach (var product in Model.Sale.SaleEntries)
+            {
+                var productInfo = Model.ProductList.SingleOrDefault(prod => prod.ProductId == product.ProductId);
+                decimal sum = productInfo.Price * product.Quantity;
+                total += sum;
+                <tr>
+                    <td>
+                        @productInfo.Name
+                    </td>
+                    <td>
+                        @productInfo.ProductCode
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @sum.ToString("C")
+                    </td>
+                </tr>
+            }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <b>@total.ToString("C")</b>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    @{
+        var surrender = Model.Cash - total;
+    }
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Cash</b>
+                </td>
+                <td>
+                    @Model.Cash
+                </td>
+                <td>
+                    <b>Surrender</b>
+                </td>
+                <td>
+                    @surrender.ToString("C")
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>
+

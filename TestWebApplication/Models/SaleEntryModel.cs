@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace TestWebApplication.Models
 {
-    public class SaleEntry
+    public class SaleEntryModel
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
         public decimal Quantity { get; set; }
-        public decimal Price { get; set; }
     }
 }

@@ -1,0 +1,92 @@
+@using TestWebApplication.Models.ViewModels;
+@model SalesViewModel
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<h2>Sales</h2>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    SaleId
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Product Code
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sale in Model.SaleList)
+            {
+                decimal total = 0;
+                @foreach (var entry in sale.SaleEntries)
+                {
+                    var productInfo = Model.ProductList.SingleOrDefault(x => x.ProductId == entry.ProductId);
+                    var amount = entry.Price * entry.Quantity;
+                    total += amount;
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @productInfo.Name
+                        </td>
+                        <td>
+                            @productInfo.ProductCode
+                        </td>
+                        <td>
+                            @entry.Quantity
+                        </td>
+                        <td>
+                            @entry.Price.ToString("C")
+                        </td>
+                        <td>
+                            @amount.ToString("C")
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <b>@sale.SaleId</b>
+                    </td>
+                    <td>
+                        @sale.Date
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <b>@total.ToString("C")</b>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
